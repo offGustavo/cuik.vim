@@ -54,7 +54,7 @@ if g:cuik.short_cuik_cmds
   command! -nargs=* -complete=shellcmd CA      call cuik#compile_async(<q-args>)
   command! -nargs=* -complete=shellcmd CS      call cuik#compile_sync(<q-args>)
   command! CR  call cuik#recompile()
-  command! CK  call cuik#kili()
+  command! CK  call cuik#kill()
 endif
 
 let &cpo = s:save_cpo
