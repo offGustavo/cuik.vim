@@ -1,0 +1,124 @@
+* cuik.vim
+
+A dead simple plugin to run any program or script inside (Neo)Vim and
+send its output to the quickfix list.
+
+Works on Vim 8.1.1418+ and Neovim 0.5+.
+
+** Why "cuik"?
+
+It's a funny name!
+
+** Install
+
+*** vim-plug
+
+#+BEGIN_SRC vim
+Plug 'offGustavo/cuik.vim'
+#+END_SRC
+
+*** lazy.nvim
+
+#+BEGIN_SRC lua
+return { 'offGustavo/cuik.vim' }
+#+END_SRC
+
+With custom options (=init= runs before the plugin loads):
+
+#+BEGIN_SRC lua
+return {
+  'offGustavo/cuik.vim',
+  init = function()
+    vim.g.cuik = {
+      run_async = true,
+    }
+  end,
+}
+#+END_SRC
+
+*** vim.pack (Neovim 0.12+)
+
+Set your options before =vim.pack.add=, since it loads the plugin right away.
+
+#+BEGIN_SRC lua
+vim.g.cuik = {
+  run_async = true,
+}
+
+vim.pack.add({ 'https://github.com/offGustavo/cuik.vim' })
+#+END_SRC
+
+*** Native packages
+
+#+BEGIN_SRC sh
+# Vim
+git clone https://github.com/offGustavo/cuik.vim \
+  ~/.vim/pack/plugins/start/cuik.vim
+
+# Neovim
+git clone https://github.com/offGustavo/cuik.vim \
+  ~/.local/share/nvim/site/pack/plugins/start/cuik.vim
+#+END_SRC
+
+*** Manual
+
+Copy =plugin/cuik.vim= and =autoload/cuik.vim= into your own config
+directory (=~/.vim= or =~/.config/nvim=).
+
+** Usage
+
+| Command             | Short | Description                                |
+|---------------------+-------+--------------------------------------------|
+| =:CuikCompile=      | =CC=  | Run a command (follows the =run_async= option) |
+| =:CuikCompileAsync= | =CA=  | Run a command without blocking the editor  |
+| =:CuikCompileSync=  | =CS=  | Run a command and wait until it finishes   |
+| =:CuikRecompile=    | =CR=  | Run the last command again                 |
+| =:CuikKill=         | =CK=  | Stop the running command                   |
+
+Pass the command as an argument, or leave it out to get a prompt:
+
+#+BEGIN_SRC vim
+:CuikCompile make -j4
+:CuikCompile
+#+END_SRC
+
+The short names are only defined when =short_cuik_cmds= is enabled.
+
+** Config
+
+Set =g:cuik= *before* the plugin loads. Any missing key uses its default.
+
+| Option            | Default | Description                                    |
+|-------------------+---------+------------------------------------------------|
+| =default_cmd=     | =''=    | Command pre-filled in the prompt on first use  |
+| =run_async=       | false   | Don't block the editor while the command runs  |
+| =open_qf=         | true    | Open the quickfix window when a command starts |
+| =auto_scroll=     | true    | Keep the quickfix window on the newest line    |
+| =prompt=          | ='$ '=  | Prompt shown when asking for a command         |
+| =short_cuik_cmds= | false   | Also define =CC=, =CA=, =CS=, =CR= and =CK=    |
+
+*** Vimscript
+
+#+BEGIN_SRC vim
+let g:cuik = {
+            \ 'default_cmd': '',
+            \ 'run_async': v:false,
+            \ 'open_qf': v:true,
+            \ 'auto_scroll': v:true,
+            \ 'prompt': '$ ',
+            \ 'short_cuik_cmds': v:false,
+            \ }
+#+END_SRC
+
+*** Lua
+
+#+BEGIN_SRC lua
+vim.g.cuik = {
+  default_cmd     = '',
+  run_async       = false,
+  open_qf         = true,
+  auto_scroll     = true,
+  prompt          = '$ ',
+  short_cuik_cmds = false,
+}
+#+END_SRC
