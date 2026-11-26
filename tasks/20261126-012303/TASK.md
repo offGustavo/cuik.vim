@@ -1,5 +1,5 @@
 # Fix link in github
 
-- STATUS: OPEN
+- STATUS: CLOSED
 - PRIORITY: 100
 - TAGS:
