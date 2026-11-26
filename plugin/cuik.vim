@@ -37,7 +37,8 @@ call extend(g:cuik, {
       \ 'open_qf': v:true,
       \ 'auto_scroll': v:true,
       \ 'prompt': '$ ',
-      \ 'short_cuik_cmds': v:false,
+      \ 'short_cmds': v:false,
+      \ 'really_short_cmds': v:false,
       \ }, 'keep')
 
 " ---------------------------------------------------------------------------
@@ -49,7 +50,15 @@ command! -nargs=* -complete=shellcmd CuikCompileSync  call cuik#compile_sync(<q-
 command! CuikRecompile call cuik#recompile()
 command! CuikKill      call cuik#kill()
 
-if g:cuik.short_cuik_cmds
+if g:cuik.short_cmds
+  command! -nargs=* -complete=shellcmd CCompile      call cuik#compile(<q-args>)
+  command! -nargs=* -complete=shellcmd CAsync call cuik#compile_async(<q-args>)
+  command! -nargs=* -complete=shellcmd CSync  call cuik#compile_sync(<q-args>)
+  command! CRecompile call cuik#recompile()
+  command! CKill      call cuik#kill()
+endif
+
+if g:cuik.really_short_cmds
   command! -nargs=* -complete=shellcmd CC      call cuik#compile(<q-args>)
   command! -nargs=* -complete=shellcmd CA      call cuik#compile_async(<q-args>)
   command! -nargs=* -complete=shellcmd CS      call cuik#compile_sync(<q-args>)
