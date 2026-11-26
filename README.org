@@ -13,6 +13,7 @@ It's a funny name!
 
 This plugin is an "extension" to the default =:make= cmd in vim, it allows the user run any cmd and get the output on the quickfix list, making it works like like the compile mode from emacs(where i get the inpiration)
 
+# TASK(20261126-012303): Fix link in github
 See [[*Usage]]
 
 ** Install
