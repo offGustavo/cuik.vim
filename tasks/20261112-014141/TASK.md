@@ -1,7 +1,7 @@
 # Make cuik.vim use subcommands intead of current Cuik<Command>
 
 - STATUS: OPEN
-- PRIORITY: 20
+- PRIORITY: 30
 - TAGS: feature
 
 `:CuikCompile` to `:Cuik compile`
