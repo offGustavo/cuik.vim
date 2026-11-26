@@ -94,15 +94,15 @@ The short names are only defined when =short_cuik_cmds= is enabled.
 
 Set =let g:cuik= or =vim.g.ciuk= *before* the plugin loads. Any missing key uses its default.
 
-| Option              | Default | Description                                                    |
-|---------------------+---------+----------------------------------------------------------------|
-| =default_cmd=       | =''=    | Command pre-filled in the prompt on first use                  |
-| =run_async=         | false   | Don't block the editor while the command runs                  |
-| =open_qf=           | true    | Open the quickfix window when a command starts                 |
-| =auto_scroll=       | true    | Keep the quickfix window on the newest line                    |
-| =prompt=            | ='$ '=  | Prompt shown when asking for a command                         |
-| =short_cmds=        | false   | Define =CCompile=, =CAsync=, =CSync=, =CRecompile= and =CKill= |
-| =really_short_cmds= | false   | Also define =CC=, =CA=, =CS=, =CR= and =CK=                    |
+| Option              | Default | Description                                                                      |
+|---------------------+---------+----------------------------------------------------------------------------------|
+| =default_cmd=       | =''=    | Command pre-filled in the prompt, use =b:cuik_cmd= to set a buffer local command |
+| =run_async=         | false   | Don't block the editor while the command runs                                    |
+| =open_qf=           | true    | Open the quickfix window when a command starts                                   |
+| =auto_scroll=       | true    | Keep the quickfix window on the newest line                                      |
+| =prompt=            | ='$ '=  | Prompt shown when asking for a command                                           |
+| =short_cmds=        | false   | Define =CCompile=, =CAsync=, =CSync=, =CRecompile= and =CKill=                   |
+| =really_short_cmds= | false   | Also define =CC=, =CA=, =CS=, =CR= and =CK=                                      |
 
 *** Vimscript
 
