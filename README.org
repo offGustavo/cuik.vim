@@ -9,6 +9,12 @@ Works on Vim 8.1.1418+ and Neovim 0.5+.
 
 It's a funny name!
 
+** Whats is cuik?
+
+This plugin is an "extension" to the default =:make= cmd in vim, it allows the user run any cmd and get the output on the quickfix list, making it works like like the compile mode from emacs(where i get the inpiration)
+
+See [[*Usage]]
+
 ** Install
 
 *** vim-plug
@@ -67,35 +73,36 @@ directory (=~/.vim= or =~/.config/nvim=).
 
 ** Usage
 
-| Command             | Short | Description                                |
-|---------------------+-------+--------------------------------------------|
-| =:CuikCompile=      | =CC=  | Run a command (follows the =run_async= option) |
-| =:CuikCompileAsync= | =CA=  | Run a command without blocking the editor  |
-| =:CuikCompileSync=  | =CS=  | Run a command and wait until it finishes   |
-| =:CuikRecompile=    | =CR=  | Run the last command again                 |
-| =:CuikKill=         | =CK=  | Stop the running command                   |
+| Command             | Short            | Really Short | Description                                    |
+|---------------------+------------------+--------------+------------------------------------------------|
+| =:CuikCompile=      | =:CCompile=      | =:CC=        | Run a command (follows the =run_async= option) |
+| =:CuikCompileAsync= | =:CCompileAsync= | =:CA=        | Run a command without blocking the editor      |
+| =:CuikCompileSync=  | =:CCompileSync=  | =:CS=        | Run a command and wait until it finishes       |
+| =:CuikRecompile=    | =:CRecompile=    | =:CR=        | Run the last command again                     |
+| =:CuikKill=         | =:CKill=         | =:CK=        | Stop the running command                       |
 
 Pass the command as an argument, or leave it out to get a prompt:
 
 #+BEGIN_SRC vim
-:CuikCompile make -j4
-:CuikCompile
+:CuikCompile make -j4<Cr> " Will execute the command
+:CuikCompile<Cr> " Will ask the user for a command to run
 #+END_SRC
 
 The short names are only defined when =short_cuik_cmds= is enabled.
 
 ** Config
 
-Set =g:cuik= *before* the plugin loads. Any missing key uses its default.
+Set =let g:cuik= or =vim.g.ciuk= *before* the plugin loads. Any missing key uses its default.
 
-| Option            | Default | Description                                    |
-|-------------------+---------+------------------------------------------------|
-| =default_cmd=     | =''=    | Command pre-filled in the prompt on first use  |
-| =run_async=       | false   | Don't block the editor while the command runs  |
-| =open_qf=         | true    | Open the quickfix window when a command starts |
-| =auto_scroll=     | true    | Keep the quickfix window on the newest line    |
-| =prompt=          | ='$ '=  | Prompt shown when asking for a command         |
-| =short_cuik_cmds= | false   | Also define =CC=, =CA=, =CS=, =CR= and =CK=    |
+| Option              | Default | Description                                                    |
+|---------------------+---------+----------------------------------------------------------------|
+| =default_cmd=       | =''=    | Command pre-filled in the prompt on first use                  |
+| =run_async=         | false   | Don't block the editor while the command runs                  |
+| =open_qf=           | true    | Open the quickfix window when a command starts                 |
+| =auto_scroll=       | true    | Keep the quickfix window on the newest line                    |
+| =prompt=            | ='$ '=  | Prompt shown when asking for a command                         |
+| =short_cmds=        | false   | Define =CCompile=, =CAsync=, =CSync=, =CRecompile= and =CKill= |
+| =really_short_cmds= | false   | Also define =CC=, =CA=, =CS=, =CR= and =CK=                    |
 
 *** Vimscript
 
@@ -106,7 +113,8 @@ let g:cuik = {
             \ 'open_qf': v:true,
             \ 'auto_scroll': v:true,
             \ 'prompt': '$ ',
-            \ 'short_cuik_cmds': v:false,
+            \ 'short_cmds': v:false,
+            \ 'really_short_cmds': v:false,
             \ }
 #+END_SRC
 
@@ -119,6 +127,7 @@ vim.g.cuik = {
   open_qf         = true,
   auto_scroll     = true,
   prompt          = '$ ',
-  short_cuik_cmds = false,
+  short_cmds = false,
+  really_short_cmds = false,
 }
 #+END_SRC
